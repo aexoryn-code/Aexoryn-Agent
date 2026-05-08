@@ -1,0 +1,4183 @@
+gateway:
+  provider: openrouter
+  base_url: https://openrouter.ai/api/v1
+  timeout_seconds: 120
+  max_retries: 3
+hybrid_routing:
+  local_threshold_tokens: 2000
+  cloud_force_tags:
+  - reasoning
+  - architecture
+  - security
+  - consensus
+consensus:
+  mode: super_judge
+  min_models_required: 1
+  judge_model_id: anthropic-claude-3.7-sonnet
+  conflict_resolution: weighted
+  tournament_top_k: 8
+  max_concurrent: 30
+  jury_timeout: 120             # Increase for Ollama CPU models (slow inference)
+token_tracking:
+  enabled: true
+  warn_threshold: 50000
+  session_cap: 500000
+self_improve:
+  enabled: true
+  max_iterations: 3
+  test_commands:
+    - pytest
+    - python -m pytest
+    - npm test
+    - npm run test
+    - go test ./...
+    - cargo test
+models:
+- id: inclusionai-ring-2.6-1t-free
+  name: 'inclusionAI: Ring-2.6-1T (free)'
+  provider: openrouter
+  model_path: inclusionai/ring-2.6-1t:free
+  tier: cloud
+  enabled: true
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemini-3.1-flash-lite
+  name: 'Google: Gemini 3.1 Flash Lite'
+  provider: openrouter
+  model_path: google/gemini-3.1-flash-lite
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: baidu-cobuddy-free
+  name: 'Baidu Qianfan: CoBuddy (free)'
+  provider: openrouter
+  model_path: baidu/cobuddy:free
+  tier: cloud
+  enabled: true
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-chat-latest
+  name: 'OpenAI: GPT Chat Latest'
+  provider: openrouter
+  model_path: openai/gpt-chat-latest
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: x-ai-grok-4.3
+  name: 'xAI: Grok 4.3'
+  provider: openrouter
+  model_path: x-ai/grok-4.3
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: ibm-granite-granite-4.1-8b
+  name: 'IBM: Granite 4.1 8B'
+  provider: openrouter
+  model_path: ibm-granite/granite-4.1-8b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-mistral-medium-3-5
+  name: 'Mistral: Mistral Medium 3.5'
+  provider: openrouter
+  model_path: mistralai/mistral-medium-3-5
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openrouter-owl-alpha
+  name: Owl Alpha
+  provider: openrouter
+  model_path: openrouter/owl-alpha
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: nvidia-nemotron-3-nano-omni-30b-a3b-reasoning-free
+  name: 'NVIDIA: Nemotron 3 Nano Omni (free)'
+  provider: openrouter
+  model_path: nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
+  tier: cloud
+  enabled: true
+  weight: 0.9
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: poolside-laguna-xs.2-free
+  name: 'Poolside: Laguna XS.2 (free)'
+  provider: openrouter
+  model_path: poolside/laguna-xs.2:free
+  tier: cloud
+  enabled: true
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: poolside-laguna-m.1-free
+  name: 'Poolside: Laguna M.1 (free)'
+  provider: openrouter
+  model_path: poolside/laguna-m.1:free
+  tier: cloud
+  enabled: true
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: anthropic-claude-haiku-latest
+  name: Anthropic Claude Haiku Latest
+  provider: openrouter
+  model_path: ~anthropic/claude-haiku-latest
+  tier: cloud
+  enabled: false
+  weight: 0.7
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-mini-latest
+  name: OpenAI GPT Mini Latest
+  provider: openrouter
+  model_path: ~openai/gpt-mini-latest
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemini-pro-latest
+  name: Google Gemini Pro Latest
+  provider: openrouter
+  model_path: ~google/gemini-pro-latest
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: moonshotai-kimi-latest
+  name: MoonshotAI Kimi Latest
+  provider: openrouter
+  model_path: ~moonshotai/kimi-latest
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemini-flash-latest
+  name: Google Gemini Flash Latest
+  provider: openrouter
+  model_path: ~google/gemini-flash-latest
+  tier: cloud
+  enabled: false
+  weight: 1.1
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: anthropic-claude-sonnet-latest
+  name: Anthropic Claude Sonnet Latest
+  provider: openrouter
+  model_path: ~anthropic/claude-sonnet-latest
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-latest
+  name: OpenAI GPT Latest
+  provider: openrouter
+  model_path: ~openai/gpt-latest
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3.5-plus-20260420
+  name: 'Qwen: Qwen3.5 Plus 2026-04-20'
+  provider: openrouter
+  model_path: qwen/qwen3.5-plus-20260420
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3.6-flash
+  name: 'Qwen: Qwen3.6 Flash'
+  provider: openrouter
+  model_path: qwen/qwen3.6-flash
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3.6-35b-a3b
+  name: 'Qwen: Qwen3.6 35B A3B'
+  provider: openrouter
+  model_path: qwen/qwen3.6-35b-a3b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3.6-max-preview
+  name: 'Qwen: Qwen3.6 Max Preview'
+  provider: openrouter
+  model_path: qwen/qwen3.6-max-preview
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3.6-27b
+  name: 'Qwen: Qwen3.6 27B'
+  provider: openrouter
+  model_path: qwen/qwen3.6-27b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5.5-pro
+  name: 'OpenAI: GPT-5.5 Pro'
+  provider: openrouter
+  model_path: openai/gpt-5.5-pro
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5.5
+  name: 'OpenAI: GPT-5.5'
+  provider: openrouter
+  model_path: openai/gpt-5.5
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: deepseek-deepseek-v4-pro
+  name: 'DeepSeek: DeepSeek V4 Pro'
+  provider: openrouter
+  model_path: deepseek/deepseek-v4-pro
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: deepseek-deepseek-v4-flash
+  name: 'DeepSeek: DeepSeek V4 Flash'
+  provider: openrouter
+  model_path: deepseek/deepseek-v4-flash
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: inclusionai-ling-2.6-1t
+  name: 'inclusionAI: Ling-2.6-1T'
+  provider: openrouter
+  model_path: inclusionai/ling-2.6-1t
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: tencent-hy3-preview-free
+  name: 'Tencent: Hy3 preview (free)'
+  provider: openrouter
+  model_path: tencent/hy3-preview:free
+  tier: cloud
+  enabled: true
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: xiaomi-mimo-v2.5-pro
+  name: 'Xiaomi: MiMo-V2.5-Pro'
+  provider: openrouter
+  model_path: xiaomi/mimo-v2.5-pro
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: xiaomi-mimo-v2.5
+  name: 'Xiaomi: MiMo-V2.5'
+  provider: openrouter
+  model_path: xiaomi/mimo-v2.5
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5.4-image-2
+  name: 'OpenAI: GPT-5.4 Image 2'
+  provider: openrouter
+  model_path: openai/gpt-5.4-image-2
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: inclusionai-ling-2.6-flash
+  name: 'inclusionAI: Ling-2.6-flash'
+  provider: openrouter
+  model_path: inclusionai/ling-2.6-flash
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: anthropic-claude-opus-latest
+  name: 'Anthropic: Claude Opus Latest'
+  provider: openrouter
+  model_path: ~anthropic/claude-opus-latest
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openrouter-pareto-code
+  name: Pareto Code Router
+  provider: openrouter
+  model_path: openrouter/pareto-code
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - code
+  max_tokens: 2048
+  temperature: 0.2
+- id: baidu-qianfan-ocr-fast-free
+  name: 'Baidu: Qianfan-OCR-Fast (free)'
+  provider: openrouter
+  model_path: baidu/qianfan-ocr-fast:free
+  tier: cloud
+  enabled: true
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: moonshotai-kimi-k2.6
+  name: 'MoonshotAI: Kimi K2.6'
+  provider: openrouter
+  model_path: moonshotai/kimi-k2.6
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: anthropic-claude-opus-4.7
+  name: 'Anthropic: Claude Opus 4.7'
+  provider: openrouter
+  model_path: anthropic/claude-opus-4.7
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: anthropic-claude-opus-4.6-fast
+  name: 'Anthropic: Claude Opus 4.6 (Fast)'
+  provider: openrouter
+  model_path: anthropic/claude-opus-4.6-fast
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: z-ai-glm-5.1
+  name: 'Z.ai: GLM 5.1'
+  provider: openrouter
+  model_path: z-ai/glm-5.1
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemma-4-26b-a4b-it-free
+  name: 'Google: Gemma 4 26B A4B  (free)'
+  provider: openrouter
+  model_path: google/gemma-4-26b-a4b-it:free
+  tier: cloud
+  enabled: true
+  weight: 0.7
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemma-4-26b-a4b-it
+  name: 'Google: Gemma 4 26B A4B '
+  provider: openrouter
+  model_path: google/gemma-4-26b-a4b-it
+  tier: cloud
+  enabled: false
+  weight: 0.7
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemma-4-31b-it-free
+  name: 'Google: Gemma 4 31B (free)'
+  provider: openrouter
+  model_path: google/gemma-4-31b-it:free
+  tier: cloud
+  enabled: true
+  weight: 0.7
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemma-4-31b-it
+  name: 'Google: Gemma 4 31B'
+  provider: openrouter
+  model_path: google/gemma-4-31b-it
+  tier: cloud
+  enabled: false
+  weight: 0.7
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3.6-plus
+  name: 'Qwen: Qwen3.6 Plus'
+  provider: openrouter
+  model_path: qwen/qwen3.6-plus
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: z-ai-glm-5v-turbo
+  name: 'Z.ai: GLM 5V Turbo'
+  provider: openrouter
+  model_path: z-ai/glm-5v-turbo
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: arcee-ai-trinity-large-thinking
+  name: 'Arcee AI: Trinity Large Thinking'
+  provider: openrouter
+  model_path: arcee-ai/trinity-large-thinking
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: x-ai-grok-4.20-multi-agent
+  name: 'xAI: Grok 4.20 Multi-Agent'
+  provider: openrouter
+  model_path: x-ai/grok-4.20-multi-agent
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: x-ai-grok-4.20
+  name: 'xAI: Grok 4.20'
+  provider: openrouter
+  model_path: x-ai/grok-4.20
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-lyria-3-pro-preview
+  name: 'Google: Lyria 3 Pro Preview'
+  provider: openrouter
+  model_path: google/lyria-3-pro-preview
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-lyria-3-clip-preview
+  name: 'Google: Lyria 3 Clip Preview'
+  provider: openrouter
+  model_path: google/lyria-3-clip-preview
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: kwaipilot-kat-coder-pro-v2
+  name: 'Kwaipilot: KAT-Coder-Pro V2'
+  provider: openrouter
+  model_path: kwaipilot/kat-coder-pro-v2
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - code
+  max_tokens: 2048
+  temperature: 0.2
+- id: rekaai-reka-edge
+  name: Reka Edge
+  provider: openrouter
+  model_path: rekaai/reka-edge
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: xiaomi-mimo-v2-omni
+  name: 'Xiaomi: MiMo-V2-Omni'
+  provider: openrouter
+  model_path: xiaomi/mimo-v2-omni
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: xiaomi-mimo-v2-pro
+  name: 'Xiaomi: MiMo-V2-Pro'
+  provider: openrouter
+  model_path: xiaomi/mimo-v2-pro
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: minimax-minimax-m2.7
+  name: 'MiniMax: MiniMax M2.7'
+  provider: openrouter
+  model_path: minimax/minimax-m2.7
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5.4-nano
+  name: 'OpenAI: GPT-5.4 Nano'
+  provider: openrouter
+  model_path: openai/gpt-5.4-nano
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5.4-mini
+  name: 'OpenAI: GPT-5.4 Mini'
+  provider: openrouter
+  model_path: openai/gpt-5.4-mini
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-mistral-small-2603
+  name: 'Mistral: Mistral Small 4'
+  provider: openrouter
+  model_path: mistralai/mistral-small-2603
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: z-ai-glm-5-turbo
+  name: 'Z.ai: GLM 5 Turbo'
+  provider: openrouter
+  model_path: z-ai/glm-5-turbo
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: nvidia-nemotron-3-super-120b-a12b-free
+  name: 'NVIDIA: Nemotron 3 Super (free)'
+  provider: openrouter
+  model_path: nvidia/nemotron-3-super-120b-a12b:free
+  tier: cloud
+  enabled: true
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: nvidia-nemotron-3-super-120b-a12b
+  name: 'NVIDIA: Nemotron 3 Super'
+  provider: openrouter
+  model_path: nvidia/nemotron-3-super-120b-a12b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: bytedance-seed-seed-2.0-lite
+  name: 'ByteDance Seed: Seed-2.0-Lite'
+  provider: openrouter
+  model_path: bytedance-seed/seed-2.0-lite
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3.5-9b
+  name: 'Qwen: Qwen3.5-9B'
+  provider: openrouter
+  model_path: qwen/qwen3.5-9b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5.4-pro
+  name: 'OpenAI: GPT-5.4 Pro'
+  provider: openrouter
+  model_path: openai/gpt-5.4-pro
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5.4
+  name: 'OpenAI: GPT-5.4'
+  provider: openrouter
+  model_path: openai/gpt-5.4
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: inception-mercury-2
+  name: 'Inception: Mercury 2'
+  provider: openrouter
+  model_path: inception/mercury-2
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5.3-chat
+  name: 'OpenAI: GPT-5.3 Chat'
+  provider: openrouter
+  model_path: openai/gpt-5.3-chat
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemini-3.1-flash-lite-preview
+  name: 'Google: Gemini 3.1 Flash Lite Preview'
+  provider: openrouter
+  model_path: google/gemini-3.1-flash-lite-preview
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: bytedance-seed-seed-2.0-mini
+  name: 'ByteDance Seed: Seed-2.0-Mini'
+  provider: openrouter
+  model_path: bytedance-seed/seed-2.0-mini
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemini-3.1-flash-image-preview
+  name: 'Google: Nano Banana 2 (Gemini 3.1 Flash Image Preview)'
+  provider: openrouter
+  model_path: google/gemini-3.1-flash-image-preview
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3.5-35b-a3b
+  name: 'Qwen: Qwen3.5-35B-A3B'
+  provider: openrouter
+  model_path: qwen/qwen3.5-35b-a3b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3.5-27b
+  name: 'Qwen: Qwen3.5-27B'
+  provider: openrouter
+  model_path: qwen/qwen3.5-27b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3.5-122b-a10b
+  name: 'Qwen: Qwen3.5-122B-A10B'
+  provider: openrouter
+  model_path: qwen/qwen3.5-122b-a10b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3.5-flash-02-23
+  name: 'Qwen: Qwen3.5-Flash'
+  provider: openrouter
+  model_path: qwen/qwen3.5-flash-02-23
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: liquid-lfm-2-24b-a2b
+  name: 'LiquidAI: LFM2-24B-A2B'
+  provider: openrouter
+  model_path: liquid/lfm-2-24b-a2b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemini-3.1-pro-preview-customtools
+  name: 'Google: Gemini 3.1 Pro Preview Custom Tools'
+  provider: openrouter
+  model_path: google/gemini-3.1-pro-preview-customtools
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5.3-codex
+  name: 'OpenAI: GPT-5.3-Codex'
+  provider: openrouter
+  model_path: openai/gpt-5.3-codex
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  - code
+  max_tokens: 2048
+  temperature: 0.2
+- id: aion-labs-aion-2.0
+  name: 'AionLabs: Aion-2.0'
+  provider: openrouter
+  model_path: aion-labs/aion-2.0
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemini-3.1-pro-preview
+  name: 'Google: Gemini 3.1 Pro Preview'
+  provider: openrouter
+  model_path: google/gemini-3.1-pro-preview
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: anthropic-claude-sonnet-4.6
+  name: 'Anthropic: Claude Sonnet 4.6'
+  provider: openrouter
+  model_path: anthropic/claude-sonnet-4.6
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3.5-plus-02-15
+  name: 'Qwen: Qwen3.5 Plus 2026-02-15'
+  provider: openrouter
+  model_path: qwen/qwen3.5-plus-02-15
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3.5-397b-a17b
+  name: 'Qwen: Qwen3.5 397B A17B'
+  provider: openrouter
+  model_path: qwen/qwen3.5-397b-a17b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: minimax-minimax-m2.5-free
+  name: 'MiniMax: MiniMax M2.5 (free)'
+  provider: openrouter
+  model_path: minimax/minimax-m2.5:free
+  tier: cloud
+  enabled: true
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: minimax-minimax-m2.5
+  name: 'MiniMax: MiniMax M2.5'
+  provider: openrouter
+  model_path: minimax/minimax-m2.5
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: z-ai-glm-5
+  name: 'Z.ai: GLM 5'
+  provider: openrouter
+  model_path: z-ai/glm-5
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-max-thinking
+  name: 'Qwen: Qwen3 Max Thinking'
+  provider: openrouter
+  model_path: qwen/qwen3-max-thinking
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: anthropic-claude-opus-4.6
+  name: 'Anthropic: Claude Opus 4.6'
+  provider: openrouter
+  model_path: anthropic/claude-opus-4.6
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-coder-next
+  name: 'Qwen: Qwen3 Coder Next'
+  provider: openrouter
+  model_path: qwen/qwen3-coder-next
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - code
+  max_tokens: 2048
+  temperature: 0.2
+- id: openrouter-free
+  name: Free Models Router
+  provider: openrouter
+  model_path: openrouter/free
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: stepfun-step-3.5-flash
+  name: 'StepFun: Step 3.5 Flash'
+  provider: openrouter
+  model_path: stepfun/step-3.5-flash
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: arcee-ai-trinity-large-preview
+  name: 'Arcee AI: Trinity Large Preview'
+  provider: openrouter
+  model_path: arcee-ai/trinity-large-preview
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: moonshotai-kimi-k2.5
+  name: 'MoonshotAI: Kimi K2.5'
+  provider: openrouter
+  model_path: moonshotai/kimi-k2.5
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: upstage-solar-pro-3
+  name: 'Upstage: Solar Pro 3'
+  provider: openrouter
+  model_path: upstage/solar-pro-3
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: minimax-minimax-m2-her
+  name: 'MiniMax: MiniMax M2-her'
+  provider: openrouter
+  model_path: minimax/minimax-m2-her
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: writer-palmyra-x5
+  name: 'Writer: Palmyra X5'
+  provider: openrouter
+  model_path: writer/palmyra-x5
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: liquid-lfm-2.5-1.2b-thinking-free
+  name: 'LiquidAI: LFM2.5-1.2B-Thinking (free)'
+  provider: openrouter
+  model_path: liquid/lfm-2.5-1.2b-thinking:free
+  tier: cloud
+  enabled: true
+  weight: 0.9
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: liquid-lfm-2.5-1.2b-instruct-free
+  name: 'LiquidAI: LFM2.5-1.2B-Instruct (free)'
+  provider: openrouter
+  model_path: liquid/lfm-2.5-1.2b-instruct:free
+  tier: cloud
+  enabled: true
+  weight: 0.9
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-audio
+  name: 'OpenAI: GPT Audio'
+  provider: openrouter
+  model_path: openai/gpt-audio
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-audio-mini
+  name: 'OpenAI: GPT Audio Mini'
+  provider: openrouter
+  model_path: openai/gpt-audio-mini
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: z-ai-glm-4.7-flash
+  name: 'Z.ai: GLM 4.7 Flash'
+  provider: openrouter
+  model_path: z-ai/glm-4.7-flash
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5.2-codex
+  name: 'OpenAI: GPT-5.2-Codex'
+  provider: openrouter
+  model_path: openai/gpt-5.2-codex
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  - code
+  max_tokens: 2048
+  temperature: 0.2
+- id: bytedance-seed-seed-1.6-flash
+  name: 'ByteDance Seed: Seed 1.6 Flash'
+  provider: openrouter
+  model_path: bytedance-seed/seed-1.6-flash
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: bytedance-seed-seed-1.6
+  name: 'ByteDance Seed: Seed 1.6'
+  provider: openrouter
+  model_path: bytedance-seed/seed-1.6
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: minimax-minimax-m2.1
+  name: 'MiniMax: MiniMax M2.1'
+  provider: openrouter
+  model_path: minimax/minimax-m2.1
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: z-ai-glm-4.7
+  name: 'Z.ai: GLM 4.7'
+  provider: openrouter
+  model_path: z-ai/glm-4.7
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemini-3-flash-preview
+  name: 'Google: Gemini 3 Flash Preview'
+  provider: openrouter
+  model_path: google/gemini-3-flash-preview
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: xiaomi-mimo-v2-flash
+  name: 'Xiaomi: MiMo-V2-Flash'
+  provider: openrouter
+  model_path: xiaomi/mimo-v2-flash
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: nvidia-nemotron-3-nano-30b-a3b-free
+  name: 'NVIDIA: Nemotron 3 Nano 30B A3B (free)'
+  provider: openrouter
+  model_path: nvidia/nemotron-3-nano-30b-a3b:free
+  tier: cloud
+  enabled: true
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: nvidia-nemotron-3-nano-30b-a3b
+  name: 'NVIDIA: Nemotron 3 Nano 30B A3B'
+  provider: openrouter
+  model_path: nvidia/nemotron-3-nano-30b-a3b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5.2-chat
+  name: 'OpenAI: GPT-5.2 Chat'
+  provider: openrouter
+  model_path: openai/gpt-5.2-chat
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5.2-pro
+  name: 'OpenAI: GPT-5.2 Pro'
+  provider: openrouter
+  model_path: openai/gpt-5.2-pro
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5.2
+  name: 'OpenAI: GPT-5.2'
+  provider: openrouter
+  model_path: openai/gpt-5.2
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-devstral-2512
+  name: 'Mistral: Devstral 2 2512'
+  provider: openrouter
+  model_path: mistralai/devstral-2512
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: relace-relace-search
+  name: 'Relace: Relace Search'
+  provider: openrouter
+  model_path: relace/relace-search
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: z-ai-glm-4.6v
+  name: 'Z.ai: GLM 4.6V'
+  provider: openrouter
+  model_path: z-ai/glm-4.6v
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: nex-agi-deepseek-v3.1-nex-n1
+  name: 'Nex AGI: DeepSeek V3.1 Nex N1'
+  provider: openrouter
+  model_path: nex-agi/deepseek-v3.1-nex-n1
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: essentialai-rnj-1-instruct
+  name: 'EssentialAI: Rnj 1 Instruct'
+  provider: openrouter
+  model_path: essentialai/rnj-1-instruct
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: openrouter-bodybuilder
+  name: Body Builder (beta)
+  provider: openrouter
+  model_path: openrouter/bodybuilder
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5.1-codex-max
+  name: 'OpenAI: GPT-5.1-Codex-Max'
+  provider: openrouter
+  model_path: openai/gpt-5.1-codex-max
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  - code
+  max_tokens: 2048
+  temperature: 0.2
+- id: amazon-nova-2-lite-v1
+  name: 'Amazon: Nova 2 Lite'
+  provider: openrouter
+  model_path: amazon/nova-2-lite-v1
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-ministral-14b-2512
+  name: 'Mistral: Ministral 3 14B 2512'
+  provider: openrouter
+  model_path: mistralai/ministral-14b-2512
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-ministral-8b-2512
+  name: 'Mistral: Ministral 3 8B 2512'
+  provider: openrouter
+  model_path: mistralai/ministral-8b-2512
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-ministral-3b-2512
+  name: 'Mistral: Ministral 3 3B 2512'
+  provider: openrouter
+  model_path: mistralai/ministral-3b-2512
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-mistral-large-2512
+  name: 'Mistral: Mistral Large 3 2512'
+  provider: openrouter
+  model_path: mistralai/mistral-large-2512
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: arcee-ai-trinity-mini
+  name: 'Arcee AI: Trinity Mini'
+  provider: openrouter
+  model_path: arcee-ai/trinity-mini
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: deepseek-deepseek-v3.2-speciale
+  name: 'DeepSeek: DeepSeek V3.2 Speciale'
+  provider: openrouter
+  model_path: deepseek/deepseek-v3.2-speciale
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: deepseek-deepseek-v3.2
+  name: 'DeepSeek: DeepSeek V3.2'
+  provider: openrouter
+  model_path: deepseek/deepseek-v3.2
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: prime-intellect-intellect-3
+  name: 'Prime Intellect: INTELLECT-3'
+  provider: openrouter
+  model_path: prime-intellect/intellect-3
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: anthropic-claude-opus-4.5
+  name: 'Anthropic: Claude Opus 4.5'
+  provider: openrouter
+  model_path: anthropic/claude-opus-4.5
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: allenai-olmo-3-32b-think
+  name: 'AllenAI: Olmo 3 32B Think'
+  provider: openrouter
+  model_path: allenai/olmo-3-32b-think
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemini-3-pro-image-preview
+  name: 'Google: Nano Banana Pro (Gemini 3 Pro Image Preview)'
+  provider: openrouter
+  model_path: google/gemini-3-pro-image-preview
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: x-ai-grok-4.1-fast
+  name: 'xAI: Grok 4.1 Fast'
+  provider: openrouter
+  model_path: x-ai/grok-4.1-fast
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: deepcogito-cogito-v2.1-671b
+  name: 'Deep Cogito: Cogito v2.1 671B'
+  provider: openrouter
+  model_path: deepcogito/cogito-v2.1-671b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5.1
+  name: 'OpenAI: GPT-5.1'
+  provider: openrouter
+  model_path: openai/gpt-5.1
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5.1-chat
+  name: 'OpenAI: GPT-5.1 Chat'
+  provider: openrouter
+  model_path: openai/gpt-5.1-chat
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5.1-codex
+  name: 'OpenAI: GPT-5.1-Codex'
+  provider: openrouter
+  model_path: openai/gpt-5.1-codex
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  - code
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5.1-codex-mini
+  name: 'OpenAI: GPT-5.1-Codex-Mini'
+  provider: openrouter
+  model_path: openai/gpt-5.1-codex-mini
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  - code
+  max_tokens: 2048
+  temperature: 0.2
+- id: moonshotai-kimi-k2-thinking
+  name: 'MoonshotAI: Kimi K2 Thinking'
+  provider: openrouter
+  model_path: moonshotai/kimi-k2-thinking
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: amazon-nova-premier-v1
+  name: 'Amazon: Nova Premier 1.0'
+  provider: openrouter
+  model_path: amazon/nova-premier-v1
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: perplexity-sonar-pro-search
+  name: 'Perplexity: Sonar Pro Search'
+  provider: openrouter
+  model_path: perplexity/sonar-pro-search
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-voxtral-small-24b-2507
+  name: 'Mistral: Voxtral Small 24B 2507'
+  provider: openrouter
+  model_path: mistralai/voxtral-small-24b-2507
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-oss-safeguard-20b
+  name: 'OpenAI: gpt-oss-safeguard-20b'
+  provider: openrouter
+  model_path: openai/gpt-oss-safeguard-20b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: nvidia-nemotron-nano-12b-v2-vl-free
+  name: 'NVIDIA: Nemotron Nano 12B 2 VL (free)'
+  provider: openrouter
+  model_path: nvidia/nemotron-nano-12b-v2-vl:free
+  tier: cloud
+  enabled: true
+  weight: 0.9
+  strengths:
+  - general
+  - vision
+  max_tokens: 2048
+  temperature: 0.2
+- id: minimax-minimax-m2
+  name: 'MiniMax: MiniMax M2'
+  provider: openrouter
+  model_path: minimax/minimax-m2
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-vl-32b-instruct
+  name: 'Qwen: Qwen3 VL 32B Instruct'
+  provider: openrouter
+  model_path: qwen/qwen3-vl-32b-instruct
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - vision
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: ibm-granite-granite-4.0-h-micro
+  name: 'IBM: Granite 4.0 Micro'
+  provider: openrouter
+  model_path: ibm-granite/granite-4.0-h-micro
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: microsoft-phi-4-mini-instruct
+  name: 'Microsoft: Phi 4 Mini Instruct'
+  provider: openrouter
+  model_path: microsoft/phi-4-mini-instruct
+  tier: cloud
+  enabled: false
+  weight: 1.1
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5-image-mini
+  name: 'OpenAI: GPT-5 Image Mini'
+  provider: openrouter
+  model_path: openai/gpt-5-image-mini
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: anthropic-claude-haiku-4.5
+  name: 'Anthropic: Claude Haiku 4.5'
+  provider: openrouter
+  model_path: anthropic/claude-haiku-4.5
+  tier: cloud
+  enabled: false
+  weight: 0.7
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-vl-8b-thinking
+  name: 'Qwen: Qwen3 VL 8B Thinking'
+  provider: openrouter
+  model_path: qwen/qwen3-vl-8b-thinking
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - reasoning
+  - vision
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-vl-8b-instruct
+  name: 'Qwen: Qwen3 VL 8B Instruct'
+  provider: openrouter
+  model_path: qwen/qwen3-vl-8b-instruct
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - vision
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5-image
+  name: 'OpenAI: GPT-5 Image'
+  provider: openrouter
+  model_path: openai/gpt-5-image
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-o3-deep-research
+  name: 'OpenAI: o3 Deep Research'
+  provider: openrouter
+  model_path: openai/o3-deep-research
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-o4-mini-deep-research
+  name: 'OpenAI: o4 Mini Deep Research'
+  provider: openrouter
+  model_path: openai/o4-mini-deep-research
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: nvidia-llama-3.3-nemotron-super-49b-v1.5
+  name: 'NVIDIA: Llama 3.3 Nemotron Super 49B V1.5'
+  provider: openrouter
+  model_path: nvidia/llama-3.3-nemotron-super-49b-v1.5
+  tier: cloud
+  enabled: false
+  weight: 1.1
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: baidu-ernie-4.5-21b-a3b-thinking
+  name: 'Baidu: ERNIE 4.5 21B A3B Thinking'
+  provider: openrouter
+  model_path: baidu/ernie-4.5-21b-a3b-thinking
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemini-2.5-flash-image
+  name: 'Google: Nano Banana (Gemini 2.5 Flash Image)'
+  provider: openrouter
+  model_path: google/gemini-2.5-flash-image
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-vl-30b-a3b-thinking
+  name: 'Qwen: Qwen3 VL 30B A3B Thinking'
+  provider: openrouter
+  model_path: qwen/qwen3-vl-30b-a3b-thinking
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - reasoning
+  - vision
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-vl-30b-a3b-instruct
+  name: 'Qwen: Qwen3 VL 30B A3B Instruct'
+  provider: openrouter
+  model_path: qwen/qwen3-vl-30b-a3b-instruct
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - vision
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5-pro
+  name: 'OpenAI: GPT-5 Pro'
+  provider: openrouter
+  model_path: openai/gpt-5-pro
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: z-ai-glm-4.6
+  name: 'Z.ai: GLM 4.6'
+  provider: openrouter
+  model_path: z-ai/glm-4.6
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: anthropic-claude-sonnet-4.5
+  name: 'Anthropic: Claude Sonnet 4.5'
+  provider: openrouter
+  model_path: anthropic/claude-sonnet-4.5
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: deepseek-deepseek-v3.2-exp
+  name: 'DeepSeek: DeepSeek V3.2 Exp'
+  provider: openrouter
+  model_path: deepseek/deepseek-v3.2-exp
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: thedrummer-cydonia-24b-v4.1
+  name: 'TheDrummer: Cydonia 24B V4.1'
+  provider: openrouter
+  model_path: thedrummer/cydonia-24b-v4.1
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: relace-relace-apply-3
+  name: 'Relace: Relace Apply 3'
+  provider: openrouter
+  model_path: relace/relace-apply-3
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemini-2.5-flash-lite-preview-09-2025
+  name: 'Google: Gemini 2.5 Flash Lite Preview 09-2025'
+  provider: openrouter
+  model_path: google/gemini-2.5-flash-lite-preview-09-2025
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-vl-235b-a22b-thinking
+  name: 'Qwen: Qwen3 VL 235B A22B Thinking'
+  provider: openrouter
+  model_path: qwen/qwen3-vl-235b-a22b-thinking
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - reasoning
+  - vision
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-vl-235b-a22b-instruct
+  name: 'Qwen: Qwen3 VL 235B A22B Instruct'
+  provider: openrouter
+  model_path: qwen/qwen3-vl-235b-a22b-instruct
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - vision
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-max
+  name: 'Qwen: Qwen3 Max'
+  provider: openrouter
+  model_path: qwen/qwen3-max
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-coder-plus
+  name: 'Qwen: Qwen3 Coder Plus'
+  provider: openrouter
+  model_path: qwen/qwen3-coder-plus
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - code
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5-codex
+  name: 'OpenAI: GPT-5 Codex'
+  provider: openrouter
+  model_path: openai/gpt-5-codex
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  - code
+  max_tokens: 2048
+  temperature: 0.2
+- id: deepseek-deepseek-v3.1-terminus
+  name: 'DeepSeek: DeepSeek V3.1 Terminus'
+  provider: openrouter
+  model_path: deepseek/deepseek-v3.1-terminus
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: x-ai-grok-4-fast
+  name: 'xAI: Grok 4 Fast'
+  provider: openrouter
+  model_path: x-ai/grok-4-fast
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: alibaba-tongyi-deepresearch-30b-a3b
+  name: Tongyi DeepResearch 30B A3B
+  provider: openrouter
+  model_path: alibaba/tongyi-deepresearch-30b-a3b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-coder-flash
+  name: 'Qwen: Qwen3 Coder Flash'
+  provider: openrouter
+  model_path: qwen/qwen3-coder-flash
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - code
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-next-80b-a3b-thinking
+  name: 'Qwen: Qwen3 Next 80B A3B Thinking'
+  provider: openrouter
+  model_path: qwen/qwen3-next-80b-a3b-thinking
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-next-80b-a3b-instruct-free
+  name: 'Qwen: Qwen3 Next 80B A3B Instruct (free)'
+  provider: openrouter
+  model_path: qwen/qwen3-next-80b-a3b-instruct:free
+  tier: cloud
+  enabled: true
+  weight: 0.9
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-next-80b-a3b-instruct
+  name: 'Qwen: Qwen3 Next 80B A3B Instruct'
+  provider: openrouter
+  model_path: qwen/qwen3-next-80b-a3b-instruct
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen-plus-2025-07-28-thinking
+  name: 'Qwen: Qwen Plus 0728 (thinking)'
+  provider: openrouter
+  model_path: qwen/qwen-plus-2025-07-28:thinking
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen-plus-2025-07-28
+  name: 'Qwen: Qwen Plus 0728'
+  provider: openrouter
+  model_path: qwen/qwen-plus-2025-07-28
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: nvidia-nemotron-nano-9b-v2-free
+  name: 'NVIDIA: Nemotron Nano 9B V2 (free)'
+  provider: openrouter
+  model_path: nvidia/nemotron-nano-9b-v2:free
+  tier: cloud
+  enabled: true
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: nvidia-nemotron-nano-9b-v2
+  name: 'NVIDIA: Nemotron Nano 9B V2'
+  provider: openrouter
+  model_path: nvidia/nemotron-nano-9b-v2
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: moonshotai-kimi-k2-0905
+  name: 'MoonshotAI: Kimi K2 0905'
+  provider: openrouter
+  model_path: moonshotai/kimi-k2-0905
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-30b-a3b-thinking-2507
+  name: 'Qwen: Qwen3 30B A3B Thinking 2507'
+  provider: openrouter
+  model_path: qwen/qwen3-30b-a3b-thinking-2507
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: x-ai-grok-code-fast-1
+  name: 'xAI: Grok Code Fast 1'
+  provider: openrouter
+  model_path: x-ai/grok-code-fast-1
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - code
+  max_tokens: 2048
+  temperature: 0.2
+- id: nousresearch-hermes-4-70b
+  name: 'Nous: Hermes 4 70B'
+  provider: openrouter
+  model_path: nousresearch/hermes-4-70b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: nousresearch-hermes-4-405b
+  name: 'Nous: Hermes 4 405B'
+  provider: openrouter
+  model_path: nousresearch/hermes-4-405b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: deepseek-deepseek-chat-v3.1
+  name: 'DeepSeek: DeepSeek V3.1'
+  provider: openrouter
+  model_path: deepseek/deepseek-chat-v3.1
+  tier: cloud
+  enabled: false
+  weight: 1.1
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-4o-audio-preview
+  name: 'OpenAI: GPT-4o Audio'
+  provider: openrouter
+  model_path: openai/gpt-4o-audio-preview
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-mistral-medium-3.1
+  name: 'Mistral: Mistral Medium 3.1'
+  provider: openrouter
+  model_path: mistralai/mistral-medium-3.1
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: baidu-ernie-4.5-21b-a3b
+  name: 'Baidu: ERNIE 4.5 21B A3B'
+  provider: openrouter
+  model_path: baidu/ernie-4.5-21b-a3b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: baidu-ernie-4.5-vl-28b-a3b
+  name: 'Baidu: ERNIE 4.5 VL 28B A3B'
+  provider: openrouter
+  model_path: baidu/ernie-4.5-vl-28b-a3b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - vision
+  max_tokens: 2048
+  temperature: 0.2
+- id: z-ai-glm-4.5v
+  name: 'Z.ai: GLM 4.5V'
+  provider: openrouter
+  model_path: z-ai/glm-4.5v
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: ai21-jamba-large-1.7
+  name: 'AI21: Jamba Large 1.7'
+  provider: openrouter
+  model_path: ai21/jamba-large-1.7
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5-chat
+  name: 'OpenAI: GPT-5 Chat'
+  provider: openrouter
+  model_path: openai/gpt-5-chat
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5
+  name: 'OpenAI: GPT-5'
+  provider: openrouter
+  model_path: openai/gpt-5
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5-mini
+  name: 'OpenAI: GPT-5 Mini'
+  provider: openrouter
+  model_path: openai/gpt-5-mini
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-5-nano
+  name: 'OpenAI: GPT-5 Nano'
+  provider: openrouter
+  model_path: openai/gpt-5-nano
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-oss-120b-free
+  name: 'OpenAI: gpt-oss-120b (free)'
+  provider: openrouter
+  model_path: openai/gpt-oss-120b:free
+  tier: cloud
+  enabled: true
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-oss-120b
+  name: 'OpenAI: gpt-oss-120b'
+  provider: openrouter
+  model_path: openai/gpt-oss-120b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-oss-20b-free
+  name: 'OpenAI: gpt-oss-20b (free)'
+  provider: openrouter
+  model_path: openai/gpt-oss-20b:free
+  tier: cloud
+  enabled: true
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-oss-20b
+  name: 'OpenAI: gpt-oss-20b'
+  provider: openrouter
+  model_path: openai/gpt-oss-20b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: anthropic-claude-opus-4.1
+  name: 'Anthropic: Claude Opus 4.1'
+  provider: openrouter
+  model_path: anthropic/claude-opus-4.1
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-codestral-2508
+  name: 'Mistral: Codestral 2508'
+  provider: openrouter
+  model_path: mistralai/codestral-2508
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - code
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-coder-30b-a3b-instruct
+  name: 'Qwen: Qwen3 Coder 30B A3B Instruct'
+  provider: openrouter
+  model_path: qwen/qwen3-coder-30b-a3b-instruct
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - code
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-30b-a3b-instruct-2507
+  name: 'Qwen: Qwen3 30B A3B Instruct 2507'
+  provider: openrouter
+  model_path: qwen/qwen3-30b-a3b-instruct-2507
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: z-ai-glm-4.5
+  name: 'Z.ai: GLM 4.5'
+  provider: openrouter
+  model_path: z-ai/glm-4.5
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: z-ai-glm-4.5-air-free
+  name: 'Z.ai: GLM 4.5 Air (free)'
+  provider: openrouter
+  model_path: z-ai/glm-4.5-air:free
+  tier: cloud
+  enabled: true
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: z-ai-glm-4.5-air
+  name: 'Z.ai: GLM 4.5 Air'
+  provider: openrouter
+  model_path: z-ai/glm-4.5-air
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-235b-a22b-thinking-2507
+  name: 'Qwen: Qwen3 235B A22B Thinking 2507'
+  provider: openrouter
+  model_path: qwen/qwen3-235b-a22b-thinking-2507
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: z-ai-glm-4-32b
+  name: 'Z.ai: GLM 4 32B '
+  provider: openrouter
+  model_path: z-ai/glm-4-32b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-coder-free
+  name: 'Qwen: Qwen3 Coder 480B A35B (free)'
+  provider: openrouter
+  model_path: qwen/qwen3-coder:free
+  tier: cloud
+  enabled: true
+  weight: 0.9
+  strengths:
+  - general
+  - code
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-coder
+  name: 'Qwen: Qwen3 Coder 480B A35B'
+  provider: openrouter
+  model_path: qwen/qwen3-coder
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - code
+  max_tokens: 2048
+  temperature: 0.2
+- id: bytedance-ui-tars-1.5-7b
+  name: 'ByteDance: UI-TARS 7B '
+  provider: openrouter
+  model_path: bytedance/ui-tars-1.5-7b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemini-2.5-flash-lite
+  name: 'Google: Gemini 2.5 Flash Lite'
+  provider: openrouter
+  model_path: google/gemini-2.5-flash-lite
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-235b-a22b-2507
+  name: 'Qwen: Qwen3 235B A22B Instruct 2507'
+  provider: openrouter
+  model_path: qwen/qwen3-235b-a22b-2507
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: switchpoint-router
+  name: Switchpoint Router
+  provider: openrouter
+  model_path: switchpoint/router
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: moonshotai-kimi-k2
+  name: 'MoonshotAI: Kimi K2 0711'
+  provider: openrouter
+  model_path: moonshotai/kimi-k2
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-devstral-medium
+  name: 'Mistral: Devstral Medium'
+  provider: openrouter
+  model_path: mistralai/devstral-medium
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-devstral-small
+  name: 'Mistral: Devstral Small 1.1'
+  provider: openrouter
+  model_path: mistralai/devstral-small
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: cognitivecomputations-dolphin-mistral-24b-venice-edition-free
+  name: 'Venice: Uncensored (free)'
+  provider: openrouter
+  model_path: cognitivecomputations/dolphin-mistral-24b-venice-edition:free
+  tier: cloud
+  enabled: true
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: x-ai-grok-4
+  name: 'xAI: Grok 4'
+  provider: openrouter
+  model_path: x-ai/grok-4
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: tencent-hunyuan-a13b-instruct
+  name: 'Tencent: Hunyuan A13B Instruct'
+  provider: openrouter
+  model_path: tencent/hunyuan-a13b-instruct
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: morph-morph-v3-large
+  name: 'Morph: Morph V3 Large'
+  provider: openrouter
+  model_path: morph/morph-v3-large
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: morph-morph-v3-fast
+  name: 'Morph: Morph V3 Fast'
+  provider: openrouter
+  model_path: morph/morph-v3-fast
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: baidu-ernie-4.5-vl-424b-a47b
+  name: 'Baidu: ERNIE 4.5 VL 424B A47B '
+  provider: openrouter
+  model_path: baidu/ernie-4.5-vl-424b-a47b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - vision
+  max_tokens: 2048
+  temperature: 0.2
+- id: baidu-ernie-4.5-300b-a47b
+  name: 'Baidu: ERNIE 4.5 300B A47B '
+  provider: openrouter
+  model_path: baidu/ernie-4.5-300b-a47b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-mistral-small-3.2-24b-instruct
+  name: 'Mistral: Mistral Small 3.2 24B'
+  provider: openrouter
+  model_path: mistralai/mistral-small-3.2-24b-instruct
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: minimax-minimax-m1
+  name: 'MiniMax: MiniMax M1'
+  provider: openrouter
+  model_path: minimax/minimax-m1
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemini-2.5-flash
+  name: 'Google: Gemini 2.5 Flash'
+  provider: openrouter
+  model_path: google/gemini-2.5-flash
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemini-2.5-pro
+  name: 'Google: Gemini 2.5 Pro'
+  provider: openrouter
+  model_path: google/gemini-2.5-pro
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-o3-pro
+  name: 'OpenAI: o3 Pro'
+  provider: openrouter
+  model_path: openai/o3-pro
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: x-ai-grok-3-mini
+  name: 'xAI: Grok 3 Mini'
+  provider: openrouter
+  model_path: x-ai/grok-3-mini
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: x-ai-grok-3
+  name: 'xAI: Grok 3'
+  provider: openrouter
+  model_path: x-ai/grok-3
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemini-2.5-pro-preview
+  name: 'Google: Gemini 2.5 Pro Preview 06-05'
+  provider: openrouter
+  model_path: google/gemini-2.5-pro-preview
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: deepseek-deepseek-r1-0528
+  name: 'DeepSeek: R1 0528'
+  provider: openrouter
+  model_path: deepseek/deepseek-r1-0528
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: anthropic-claude-opus-4
+  name: 'Anthropic: Claude Opus 4'
+  provider: openrouter
+  model_path: anthropic/claude-opus-4
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: anthropic-claude-sonnet-4
+  name: 'Anthropic: Claude Sonnet 4'
+  provider: openrouter
+  model_path: anthropic/claude-sonnet-4
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemma-3n-e4b-it
+  name: 'Google: Gemma 3n 4B'
+  provider: openrouter
+  model_path: google/gemma-3n-e4b-it
+  tier: cloud
+  enabled: false
+  weight: 0.7
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-mistral-medium-3
+  name: 'Mistral: Mistral Medium 3'
+  provider: openrouter
+  model_path: mistralai/mistral-medium-3
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemini-2.5-pro-preview-05-06
+  name: 'Google: Gemini 2.5 Pro Preview 05-06'
+  provider: openrouter
+  model_path: google/gemini-2.5-pro-preview-05-06
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: arcee-ai-spotlight
+  name: 'Arcee AI: Spotlight'
+  provider: openrouter
+  model_path: arcee-ai/spotlight
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: arcee-ai-maestro-reasoning
+  name: 'Arcee AI: Maestro Reasoning'
+  provider: openrouter
+  model_path: arcee-ai/maestro-reasoning
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: arcee-ai-virtuoso-large
+  name: 'Arcee AI: Virtuoso Large'
+  provider: openrouter
+  model_path: arcee-ai/virtuoso-large
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: arcee-ai-coder-large
+  name: 'Arcee AI: Coder Large'
+  provider: openrouter
+  model_path: arcee-ai/coder-large
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - code
+  max_tokens: 2048
+  temperature: 0.2
+- id: meta-llama-llama-guard-4-12b
+  name: 'Meta: Llama Guard 4 12B'
+  provider: openrouter
+  model_path: meta-llama/llama-guard-4-12b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-30b-a3b
+  name: 'Qwen: Qwen3 30B A3B'
+  provider: openrouter
+  model_path: qwen/qwen3-30b-a3b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-8b
+  name: 'Qwen: Qwen3 8B'
+  provider: openrouter
+  model_path: qwen/qwen3-8b
+  tier: cloud
+  enabled: false
+  weight: 0.7
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-14b
+  name: 'Qwen: Qwen3 14B'
+  provider: openrouter
+  model_path: qwen/qwen3-14b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-32b
+  name: 'Qwen: Qwen3 32B'
+  provider: openrouter
+  model_path: qwen/qwen3-32b
+  tier: cloud
+  enabled: false
+  weight: 1.1
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen3-235b-a22b
+  name: 'Qwen: Qwen3 235B A22B'
+  provider: openrouter
+  model_path: qwen/qwen3-235b-a22b
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-o4-mini-high
+  name: 'OpenAI: o4 Mini High'
+  provider: openrouter
+  model_path: openai/o4-mini-high
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-o3
+  name: 'OpenAI: o3'
+  provider: openrouter
+  model_path: openai/o3
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-o4-mini
+  name: 'OpenAI: o4 Mini'
+  provider: openrouter
+  model_path: openai/o4-mini
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-4.1
+  name: 'OpenAI: GPT-4.1'
+  provider: openrouter
+  model_path: openai/gpt-4.1
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-4.1-mini
+  name: 'OpenAI: GPT-4.1 Mini'
+  provider: openrouter
+  model_path: openai/gpt-4.1-mini
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-4.1-nano
+  name: 'OpenAI: GPT-4.1 Nano'
+  provider: openrouter
+  model_path: openai/gpt-4.1-nano
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: alfredpros-codellama-7b-instruct-solidity
+  name: 'AlfredPros: CodeLLaMa 7B Instruct Solidity'
+  provider: openrouter
+  model_path: alfredpros/codellama-7b-instruct-solidity
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - code
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: x-ai-grok-3-mini-beta
+  name: 'xAI: Grok 3 Mini Beta'
+  provider: openrouter
+  model_path: x-ai/grok-3-mini-beta
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: x-ai-grok-3-beta
+  name: 'xAI: Grok 3 Beta'
+  provider: openrouter
+  model_path: x-ai/grok-3-beta
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: meta-llama-llama-4-maverick
+  name: 'Meta: Llama 4 Maverick'
+  provider: openrouter
+  model_path: meta-llama/llama-4-maverick
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: meta-llama-llama-4-scout
+  name: 'Meta: Llama 4 Scout'
+  provider: openrouter
+  model_path: meta-llama/llama-4-scout
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: deepseek-deepseek-chat-v3-0324
+  name: 'DeepSeek: DeepSeek V3 0324'
+  provider: openrouter
+  model_path: deepseek/deepseek-chat-v3-0324
+  tier: cloud
+  enabled: false
+  weight: 1.1
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-o1-pro
+  name: 'OpenAI: o1-pro'
+  provider: openrouter
+  model_path: openai/o1-pro
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-mistral-small-3.1-24b-instruct
+  name: 'Mistral: Mistral Small 3.1 24B'
+  provider: openrouter
+  model_path: mistralai/mistral-small-3.1-24b-instruct
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemma-3-4b-it
+  name: 'Google: Gemma 3 4B'
+  provider: openrouter
+  model_path: google/gemma-3-4b-it
+  tier: cloud
+  enabled: false
+  weight: 0.7
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemma-3-12b-it
+  name: 'Google: Gemma 3 12B'
+  provider: openrouter
+  model_path: google/gemma-3-12b-it
+  tier: cloud
+  enabled: false
+  weight: 0.7
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: cohere-command-a
+  name: 'Cohere: Command A'
+  provider: openrouter
+  model_path: cohere/command-a
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-4o-mini-search-preview
+  name: 'OpenAI: GPT-4o-mini Search Preview'
+  provider: openrouter
+  model_path: openai/gpt-4o-mini-search-preview
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-4o-search-preview
+  name: 'OpenAI: GPT-4o Search Preview'
+  provider: openrouter
+  model_path: openai/gpt-4o-search-preview
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: rekaai-reka-flash-3
+  name: Reka Flash 3
+  provider: openrouter
+  model_path: rekaai/reka-flash-3
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemma-3-27b-it
+  name: 'Google: Gemma 3 27B'
+  provider: openrouter
+  model_path: google/gemma-3-27b-it
+  tier: cloud
+  enabled: false
+  weight: 0.7
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: thedrummer-skyfall-36b-v2
+  name: 'TheDrummer: Skyfall 36B V2'
+  provider: openrouter
+  model_path: thedrummer/skyfall-36b-v2
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: perplexity-sonar-reasoning-pro
+  name: 'Perplexity: Sonar Reasoning Pro'
+  provider: openrouter
+  model_path: perplexity/sonar-reasoning-pro
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: perplexity-sonar-pro
+  name: 'Perplexity: Sonar Pro'
+  provider: openrouter
+  model_path: perplexity/sonar-pro
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: perplexity-sonar-deep-research
+  name: 'Perplexity: Sonar Deep Research'
+  provider: openrouter
+  model_path: perplexity/sonar-deep-research
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemini-2.0-flash-lite-001
+  name: 'Google: Gemini 2.0 Flash Lite'
+  provider: openrouter
+  model_path: google/gemini-2.0-flash-lite-001
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: anthropic-claude-3.7-sonnet
+  name: 'Anthropic: Claude 3.7 Sonnet'
+  provider: openrouter
+  model_path: anthropic/claude-3.7-sonnet
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: anthropic-claude-3.7-sonnet-thinking
+  name: 'Anthropic: Claude 3.7 Sonnet (thinking)'
+  provider: openrouter
+  model_path: anthropic/claude-3.7-sonnet:thinking
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-mistral-saba
+  name: 'Mistral: Saba'
+  provider: openrouter
+  model_path: mistralai/mistral-saba
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: meta-llama-llama-guard-3-8b
+  name: Llama Guard 3 8B
+  provider: openrouter
+  model_path: meta-llama/llama-guard-3-8b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-o3-mini-high
+  name: 'OpenAI: o3 Mini High'
+  provider: openrouter
+  model_path: openai/o3-mini-high
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemini-2.0-flash-001
+  name: 'Google: Gemini 2.0 Flash'
+  provider: openrouter
+  model_path: google/gemini-2.0-flash-001
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen-vl-plus
+  name: 'Qwen: Qwen VL Plus'
+  provider: openrouter
+  model_path: qwen/qwen-vl-plus
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - vision
+  max_tokens: 2048
+  temperature: 0.2
+- id: aion-labs-aion-1.0
+  name: 'AionLabs: Aion-1.0'
+  provider: openrouter
+  model_path: aion-labs/aion-1.0
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: aion-labs-aion-1.0-mini
+  name: 'AionLabs: Aion-1.0-Mini'
+  provider: openrouter
+  model_path: aion-labs/aion-1.0-mini
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: aion-labs-aion-rp-llama-3.1-8b
+  name: 'AionLabs: Aion-RP 1.0 (8B)'
+  provider: openrouter
+  model_path: aion-labs/aion-rp-llama-3.1-8b
+  tier: cloud
+  enabled: false
+  weight: 0.7
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen-vl-max
+  name: 'Qwen: Qwen VL Max'
+  provider: openrouter
+  model_path: qwen/qwen-vl-max
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - vision
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen-turbo
+  name: 'Qwen: Qwen-Turbo'
+  provider: openrouter
+  model_path: qwen/qwen-turbo
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen2.5-vl-72b-instruct
+  name: 'Qwen: Qwen2.5 VL 72B Instruct'
+  provider: openrouter
+  model_path: qwen/qwen2.5-vl-72b-instruct
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - vision
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen-plus
+  name: 'Qwen: Qwen-Plus'
+  provider: openrouter
+  model_path: qwen/qwen-plus
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen-max
+  name: 'Qwen: Qwen-Max '
+  provider: openrouter
+  model_path: qwen/qwen-max
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-o3-mini
+  name: 'OpenAI: o3 Mini'
+  provider: openrouter
+  model_path: openai/o3-mini
+  tier: cloud
+  enabled: false
+  weight: 1.8
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-mistral-small-24b-instruct-2501
+  name: 'Mistral: Mistral Small 3'
+  provider: openrouter
+  model_path: mistralai/mistral-small-24b-instruct-2501
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: deepseek-deepseek-r1-distill-qwen-32b
+  name: 'DeepSeek: R1 Distill Qwen 32B'
+  provider: openrouter
+  model_path: deepseek/deepseek-r1-distill-qwen-32b
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: perplexity-sonar
+  name: 'Perplexity: Sonar'
+  provider: openrouter
+  model_path: perplexity/sonar
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: deepseek-deepseek-r1-distill-llama-70b
+  name: 'DeepSeek: R1 Distill Llama 70B'
+  provider: openrouter
+  model_path: deepseek/deepseek-r1-distill-llama-70b
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: deepseek-deepseek-r1
+  name: 'DeepSeek: R1'
+  provider: openrouter
+  model_path: deepseek/deepseek-r1
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: minimax-minimax-01
+  name: 'MiniMax: MiniMax-01'
+  provider: openrouter
+  model_path: minimax/minimax-01
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: microsoft-phi-4
+  name: 'Microsoft: Phi 4'
+  provider: openrouter
+  model_path: microsoft/phi-4
+  tier: cloud
+  enabled: false
+  weight: 1.1
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: sao10k-l3.1-70b-hanami-x1
+  name: 'Sao10K: Llama 3.1 70B Hanami x1'
+  provider: openrouter
+  model_path: sao10k/l3.1-70b-hanami-x1
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: deepseek-deepseek-chat
+  name: 'DeepSeek: DeepSeek V3'
+  provider: openrouter
+  model_path: deepseek/deepseek-chat
+  tier: cloud
+  enabled: false
+  weight: 1.1
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: sao10k-l3.3-euryale-70b
+  name: 'Sao10K: Llama 3.3 Euryale 70B'
+  provider: openrouter
+  model_path: sao10k/l3.3-euryale-70b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-o1
+  name: 'OpenAI: o1'
+  provider: openrouter
+  model_path: openai/o1
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: cohere-command-r7b-12-2024
+  name: 'Cohere: Command R7B (12-2024)'
+  provider: openrouter
+  model_path: cohere/command-r7b-12-2024
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: meta-llama-llama-3.3-70b-instruct-free
+  name: 'Meta: Llama 3.3 70B Instruct (free)'
+  provider: openrouter
+  model_path: meta-llama/llama-3.3-70b-instruct:free
+  tier: cloud
+  enabled: true
+  weight: 1.1
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: meta-llama-llama-3.3-70b-instruct
+  name: 'Meta: Llama 3.3 70B Instruct'
+  provider: openrouter
+  model_path: meta-llama/llama-3.3-70b-instruct
+  tier: cloud
+  enabled: false
+  weight: 1.1
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: amazon-nova-lite-v1
+  name: 'Amazon: Nova Lite 1.0'
+  provider: openrouter
+  model_path: amazon/nova-lite-v1
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: amazon-nova-micro-v1
+  name: 'Amazon: Nova Micro 1.0'
+  provider: openrouter
+  model_path: amazon/nova-micro-v1
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: amazon-nova-pro-v1
+  name: 'Amazon: Nova Pro 1.0'
+  provider: openrouter
+  model_path: amazon/nova-pro-v1
+  tier: cloud
+  enabled: false
+  weight: 1.1
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-4o-2024-11-20
+  name: 'OpenAI: GPT-4o (2024-11-20)'
+  provider: openrouter
+  model_path: openai/gpt-4o-2024-11-20
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-mistral-large-2411
+  name: Mistral Large 2411
+  provider: openrouter
+  model_path: mistralai/mistral-large-2411
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-mistral-large-2407
+  name: Mistral Large 2407
+  provider: openrouter
+  model_path: mistralai/mistral-large-2407
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-pixtral-large-2411
+  name: 'Mistral: Pixtral Large 2411'
+  provider: openrouter
+  model_path: mistralai/pixtral-large-2411
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - vision
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen-2.5-coder-32b-instruct
+  name: Qwen2.5 Coder 32B Instruct
+  provider: openrouter
+  model_path: qwen/qwen-2.5-coder-32b-instruct
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - code
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: thedrummer-unslopnemo-12b
+  name: 'TheDrummer: UnslopNemo 12B'
+  provider: openrouter
+  model_path: thedrummer/unslopnemo-12b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: anthropic-claude-3.5-haiku
+  name: 'Anthropic: Claude 3.5 Haiku'
+  provider: openrouter
+  model_path: anthropic/claude-3.5-haiku
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: anthracite-org-magnum-v4-72b
+  name: Magnum v4 72B
+  provider: openrouter
+  model_path: anthracite-org/magnum-v4-72b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen-2.5-7b-instruct
+  name: 'Qwen: Qwen2.5 7B Instruct'
+  provider: openrouter
+  model_path: qwen/qwen-2.5-7b-instruct
+  tier: cloud
+  enabled: false
+  weight: 0.7
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: inflection-inflection-3-pi
+  name: 'Inflection: Inflection 3 Pi'
+  provider: openrouter
+  model_path: inflection/inflection-3-pi
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: inflection-inflection-3-productivity
+  name: 'Inflection: Inflection 3 Productivity'
+  provider: openrouter
+  model_path: inflection/inflection-3-productivity
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: thedrummer-rocinante-12b
+  name: 'TheDrummer: Rocinante 12B'
+  provider: openrouter
+  model_path: thedrummer/rocinante-12b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: meta-llama-llama-3.2-3b-instruct-free
+  name: 'Meta: Llama 3.2 3B Instruct (free)'
+  provider: openrouter
+  model_path: meta-llama/llama-3.2-3b-instruct:free
+  tier: cloud
+  enabled: true
+  weight: 0.7
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: meta-llama-llama-3.2-3b-instruct
+  name: 'Meta: Llama 3.2 3B Instruct'
+  provider: openrouter
+  model_path: meta-llama/llama-3.2-3b-instruct
+  tier: cloud
+  enabled: false
+  weight: 0.7
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: meta-llama-llama-3.2-1b-instruct
+  name: 'Meta: Llama 3.2 1B Instruct'
+  provider: openrouter
+  model_path: meta-llama/llama-3.2-1b-instruct
+  tier: cloud
+  enabled: false
+  weight: 0.7
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: meta-llama-llama-3.2-11b-vision-instruct
+  name: 'Meta: Llama 3.2 11B Vision Instruct'
+  provider: openrouter
+  model_path: meta-llama/llama-3.2-11b-vision-instruct
+  tier: cloud
+  enabled: false
+  weight: 0.7
+  strengths:
+  - general
+  - vision
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: qwen-qwen-2.5-72b-instruct
+  name: Qwen2.5 72B Instruct
+  provider: openrouter
+  model_path: qwen/qwen-2.5-72b-instruct
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: cohere-command-r-08-2024
+  name: 'Cohere: Command R (08-2024)'
+  provider: openrouter
+  model_path: cohere/command-r-08-2024
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: cohere-command-r-plus-08-2024
+  name: 'Cohere: Command R+ (08-2024)'
+  provider: openrouter
+  model_path: cohere/command-r-plus-08-2024
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: sao10k-l3.1-euryale-70b
+  name: 'Sao10K: Llama 3.1 Euryale 70B v2.2'
+  provider: openrouter
+  model_path: sao10k/l3.1-euryale-70b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: nousresearch-hermes-3-llama-3.1-70b
+  name: 'Nous: Hermes 3 70B Instruct'
+  provider: openrouter
+  model_path: nousresearch/hermes-3-llama-3.1-70b
+  tier: cloud
+  enabled: false
+  weight: 1.1
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: nousresearch-hermes-3-llama-3.1-405b-free
+  name: 'Nous: Hermes 3 405B Instruct (free)'
+  provider: openrouter
+  model_path: nousresearch/hermes-3-llama-3.1-405b:free
+  tier: cloud
+  enabled: true
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: nousresearch-hermes-3-llama-3.1-405b
+  name: 'Nous: Hermes 3 405B Instruct'
+  provider: openrouter
+  model_path: nousresearch/hermes-3-llama-3.1-405b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: sao10k-l3-lunaris-8b
+  name: 'Sao10K: Llama 3 8B Lunaris'
+  provider: openrouter
+  model_path: sao10k/l3-lunaris-8b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-4o-2024-08-06
+  name: 'OpenAI: GPT-4o (2024-08-06)'
+  provider: openrouter
+  model_path: openai/gpt-4o-2024-08-06
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: meta-llama-llama-3.1-70b-instruct
+  name: 'Meta: Llama 3.1 70B Instruct'
+  provider: openrouter
+  model_path: meta-llama/llama-3.1-70b-instruct
+  tier: cloud
+  enabled: false
+  weight: 1.1
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: meta-llama-llama-3.1-8b-instruct
+  name: 'Meta: Llama 3.1 8B Instruct'
+  provider: openrouter
+  model_path: meta-llama/llama-3.1-8b-instruct
+  tier: cloud
+  enabled: false
+  weight: 0.7
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-mistral-nemo
+  name: 'Mistral: Mistral Nemo'
+  provider: openrouter
+  model_path: mistralai/mistral-nemo
+  tier: cloud
+  enabled: false
+  weight: 0.7
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-4o-mini
+  name: 'OpenAI: GPT-4o-mini'
+  provider: openrouter
+  model_path: openai/gpt-4o-mini
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-4o-mini-2024-07-18
+  name: 'OpenAI: GPT-4o-mini (2024-07-18)'
+  provider: openrouter
+  model_path: openai/gpt-4o-mini-2024-07-18
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: google-gemma-2-27b-it
+  name: 'Google: Gemma 2 27B'
+  provider: openrouter
+  model_path: google/gemma-2-27b-it
+  tier: cloud
+  enabled: false
+  weight: 0.7
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: sao10k-l3-euryale-70b
+  name: 'Sao10k: Llama 3 Euryale 70B v2.1'
+  provider: openrouter
+  model_path: sao10k/l3-euryale-70b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - reasoning
+  max_tokens: 2048
+  temperature: 0.2
+- id: nousresearch-hermes-2-pro-llama-3-8b
+  name: 'NousResearch: Hermes 2 Pro - Llama-3 8B'
+  provider: openrouter
+  model_path: nousresearch/hermes-2-pro-llama-3-8b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-4o-2024-05-13
+  name: 'OpenAI: GPT-4o (2024-05-13)'
+  provider: openrouter
+  model_path: openai/gpt-4o-2024-05-13
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-4o
+  name: 'OpenAI: GPT-4o'
+  provider: openrouter
+  model_path: openai/gpt-4o
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: meta-llama-llama-3-8b-instruct
+  name: 'Meta: Llama 3 8B Instruct'
+  provider: openrouter
+  model_path: meta-llama/llama-3-8b-instruct
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: meta-llama-llama-3-70b-instruct
+  name: 'Meta: Llama 3 70B Instruct'
+  provider: openrouter
+  model_path: meta-llama/llama-3-70b-instruct
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-mixtral-8x22b-instruct
+  name: 'Mistral: Mixtral 8x22B Instruct'
+  provider: openrouter
+  model_path: mistralai/mixtral-8x22b-instruct
+  tier: cloud
+  enabled: false
+  weight: 1.1
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: microsoft-wizardlm-2-8x22b
+  name: WizardLM-2 8x22B
+  provider: openrouter
+  model_path: microsoft/wizardlm-2-8x22b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-4-turbo
+  name: 'OpenAI: GPT-4 Turbo'
+  provider: openrouter
+  model_path: openai/gpt-4-turbo
+  tier: cloud
+  enabled: false
+  weight: 1.1
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: anthropic-claude-3-haiku
+  name: 'Anthropic: Claude 3 Haiku'
+  provider: openrouter
+  model_path: anthropic/claude-3-haiku
+  tier: cloud
+  enabled: false
+  weight: 1.1
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-mistral-large
+  name: Mistral Large
+  provider: openrouter
+  model_path: mistralai/mistral-large
+  tier: cloud
+  enabled: false
+  weight: 1.4
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-3.5-turbo-0613
+  name: 'OpenAI: GPT-3.5 Turbo (older v0613)'
+  provider: openrouter
+  model_path: openai/gpt-3.5-turbo-0613
+  tier: cloud
+  enabled: false
+  weight: 0.7
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-4-turbo-preview
+  name: 'OpenAI: GPT-4 Turbo Preview'
+  provider: openrouter
+  model_path: openai/gpt-4-turbo-preview
+  tier: cloud
+  enabled: false
+  weight: 1.1
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: alpindale-goliath-120b
+  name: Goliath 120B
+  provider: openrouter
+  model_path: alpindale/goliath-120b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openrouter-auto
+  name: Auto Router
+  provider: openrouter
+  model_path: openrouter/auto
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-4-1106-preview
+  name: 'OpenAI: GPT-4 Turbo (older v1106)'
+  provider: openrouter
+  model_path: openai/gpt-4-1106-preview
+  tier: cloud
+  enabled: false
+  weight: 1.1
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-3.5-turbo-instruct
+  name: 'OpenAI: GPT-3.5 Turbo Instruct'
+  provider: openrouter
+  model_path: openai/gpt-3.5-turbo-instruct
+  tier: cloud
+  enabled: false
+  weight: 0.7
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: mistralai-mistral-7b-instruct-v0.1
+  name: 'Mistral: Mistral 7B Instruct v0.1'
+  provider: openrouter
+  model_path: mistralai/mistral-7b-instruct-v0.1
+  tier: cloud
+  enabled: false
+  weight: 0.7
+  strengths:
+  - general
+  - chat
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-3.5-turbo-16k
+  name: 'OpenAI: GPT-3.5 Turbo 16k'
+  provider: openrouter
+  model_path: openai/gpt-3.5-turbo-16k
+  tier: cloud
+  enabled: false
+  weight: 0.7
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: mancer-weaver
+  name: 'Mancer: Weaver (alpha)'
+  provider: openrouter
+  model_path: mancer/weaver
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: undi95-remm-slerp-l2-13b
+  name: ReMM SLERP 13B
+  provider: openrouter
+  model_path: undi95/remm-slerp-l2-13b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: gryphe-mythomax-l2-13b
+  name: MythoMax 13B
+  provider: openrouter
+  model_path: gryphe/mythomax-l2-13b
+  tier: cloud
+  enabled: false
+  weight: 0.9
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-4
+  name: 'OpenAI: GPT-4'
+  provider: openrouter
+  model_path: openai/gpt-4
+  tier: cloud
+  enabled: false
+  weight: 1.1
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-3.5-turbo
+  name: 'OpenAI: GPT-3.5 Turbo'
+  provider: openrouter
+  model_path: openai/gpt-3.5-turbo
+  tier: cloud
+  enabled: false
+  weight: 0.7
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
+- id: openai-gpt-4-0314
+  name: 'OpenAI: GPT-4 (older v0314)'
+  provider: openrouter
+  model_path: openai/gpt-4-0314
+  tier: cloud
+  enabled: false
+  weight: 1.1
+  strengths:
+  - general
+  max_tokens: 2048
+  temperature: 0.2
