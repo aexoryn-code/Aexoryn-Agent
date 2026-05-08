@@ -75,8 +75,8 @@ flowchart TD
 
 ```bash
 # 1. Clone & install
-git clone https://github.com/your-org/aexoryn-agent
-cd aexoryn-agent
+git clone https://github.com/aexoryn-code/Aexoryn-Agent
+cd Aexoryn-Agent
 pip install -r requirements.txt
 
 # 2. Configure
