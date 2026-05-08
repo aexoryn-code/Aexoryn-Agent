@@ -52,13 +52,22 @@ flowchart TD
 
 | Feature | Description |
 |---|---|
-| **Multi-Model Jury** | Parallel inference across GPT, Claude, Gemini, DeepSeek, Llama, Qwen |
-| **Super-Judge Consensus** | A designated judge model synthesises all jury outputs into one Master Solution |
-| **Hybrid Routing** | Routes simple tasks to local Ollama; complex tasks to cloud models |
+| **Multi-Model Jury** | Parallel inference across 366 models — GPT, Claude, Gemini, DeepSeek, Llama, Qwen |
+| **Super-Judge Consensus** | Judge model synthesises all jury outputs into one Master Solution |
+| **Model Profiles** | `fast` / `turbo` / `balanced` / `premium` presets to control speed vs quality |
+| **Multi-File Output** | Agent writes multiple files at once using `=== FILE: path ===` format |
+| **Self-Improving Loop** | Runs tests automatically after writing code; fixes and retries up to 3× |
+| **Long-Term Memory** | Recalls relevant past solutions as context across sessions |
+| **Chat / Interactive Mode** | REPL with conversation history — follow up, refine, iterate |
+| **Auto-Read Workspace** | Scans workspace files for relevant context before calling the jury |
+| **Diff Preview** | Shows colored diff and asks confirmation before overwriting any file |
+| **Token Budget Guard** | Warns at 50K tokens; hard stops at 500K to prevent runaway credit spend |
+| **Task History** | Every task auto-saved to `logs/history.json` — browse with `history` command |
+| **Hybrid Routing** | Routes simple tasks to local Ollama; complex tasks to cloud |
 | **Plug-and-Play Registry** | Add any model in `model_config.yaml` — no code changes needed |
-| **MCP-Style Tools** | Create, read, edit, delete files & run terminal commands autonomously |
-| **Self-Correction** | Failed commands are sent back to the judge model for auto-fix and retry |
+| **Self-Correction** | Failed commands sent back to judge model for auto-fix and retry |
 | **Rich Terminal UI** | Live spinners, jury tables, visual diffs, token progress bar |
+| **Ollama Support** | Free local inference — no API key, no credits, no rate limits |
 
 ---
 
@@ -74,16 +83,33 @@ pip install -r requirements.txt
 cp .env.example .env
 # Edit .env → add your OPENROUTER_API_KEY
 
-# 3. Run  (note: 'run' subcommand is required)
-python main.py run "Refactor src/auth.py to use JWT and add refresh token support"
+# 3. Run your first task
+python main.py run "Create a login page in HTML"
 
-# 4. Options
-python main.py run --workspace ./my-project "Add dark mode to App.tsx"
-python main.py run --mode majority_vote "Fix failing unit tests"
-python main.py list-models
-python main.py reload-config
+# Use a profile to control speed vs quality
+python main.py run --profile fast   "Fix syntax error in utils.py"   # 1 model, instant
+python main.py run --profile balanced "Create a REST API in Flask"    # 15 free models
+python main.py run --profile premium  "Architect a microservice"      # 50 top models
+
+# Auto-apply without confirmation prompt
+python main.py run --yes --workspace ./my-project "Add dark mode to App.tsx"
+
+# Interactive chat mode with memory
+python main.py chat --workspace ./my-project
+
+# View all commands & options
 python main.py --help
 python main.py run --help
+```
+
+### Free — No API Key Required (Ollama)
+```bash
+# Install Ollama from https://ollama.com, then pull a model:
+ollama pull llama3.2
+
+# Register with Aexoryn and run
+python main.py setup-ollama
+python main.py run --profile fast "your task"
 ```
 
 ---
@@ -121,20 +147,30 @@ No code changes required. The registry loads the YAML at runtime.
 
 ```
 aexoryn-agent/
-├── main.py                  # CLI entry point (Typer)
+├── main.py                  # CLI entry point (Typer) — all commands
 ├── model_config.yaml        # Plug-and-Play model registry
 ├── requirements.txt
-├── .env.example
+├── .env.example             # Copy to .env and add your API key
 ├── LICENSE                  # MIT 2026
 │
 ├── core/
-│   ├── registry.py          # Model Registry + hybrid router + client builder
+│   ├── registry.py          # ModelRegistry + profiles + hybrid router + budget guard
 │   ├── consensus.py         # Super-Judge / majority_vote / weighted_rank
-│   ├── planner.py           # Task planner + execution loop
+│   ├── planner.py           # TaskPlanner — plan, jury, consensus, write, self-improve
+│   ├── memory.py            # Long-term memory store (keyword-based recall)
 │   └── tools.py             # FileSystemTool + TerminalTool + DiffTool
 │
-└── ui/
-    └── terminal.py          # Rich terminal UI (banner, logs, diffs, summary)
+├── scripts/
+│   ├── fetch_models.py      # Fetch & register cloud models from OpenRouter
+│   └── setup_ollama.py      # Discover & register local Ollama models
+│
+├── ui/
+│   └── terminal.py          # Rich terminal UI — banner, logs, diffs, summary, budget
+│
+└── logs/                    # Auto-created at runtime (gitignored)
+    ├── session.log          # Full session log
+    ├── history.json         # Task history (browsable via `history` command)
+    └── memory.json          # Long-term memory store
 ```
 
 ---
